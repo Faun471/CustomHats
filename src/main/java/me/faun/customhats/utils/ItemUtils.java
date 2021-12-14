@@ -95,15 +95,19 @@ public class ItemUtils {
     }
 
     public static void updateGlow (PaginatedGui gui, Player player) {
-        for (GuiItem g : gui.getCurrentPageItems().values()) {
-            ItemStack itemStack = g.getItemStack();
-            ItemMeta meta = itemStack.getItemMeta();
+        if (gui.isUpdating()) return;
+        Bukkit.getScheduler().runTaskAsynchronously(CustomHats.getInstance(), () -> {
+            for (GuiItem g : gui.getCurrentPageItems().values()) {
+                ItemStack itemStack = g.getItemStack();
+                ItemMeta meta = itemStack.getItemMeta();
 
-            changeGlow(itemStack, player.getEquipment().getHelmet() != null
-                    && ItemUtils.comparePDC(ItemUtils.getPDC(player.getEquipment().getHelmet().getItemMeta()),
-                    ItemUtils.getPDC(meta)));
-            gui.update();
-        }
+                changeGlow(itemStack, player.getEquipment().getHelmet() != null
+                        && ItemUtils.comparePDC(ItemUtils.getPDC(player.getEquipment().getHelmet().getItemMeta()),
+                        ItemUtils.getPDC(meta)));
+                gui.update();
+            }
+        });
+
     }
 
     public static boolean isHat(@Nullable ItemMeta meta) {

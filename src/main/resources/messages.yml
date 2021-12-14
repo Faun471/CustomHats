@@ -1,0 +1,26 @@
+prefix: "<g:#f9d976:#f39f86>Hats&r"
+plugin-reload: "%prefix% Plugin has been reloaded!"
+
+no-perms: "%prefix% You do not have enough permission to use that command"
+no-perms-hat: "%prefix% You're not allowed to wear that hat!"
+no-perms-hat-other: "%prefix% That player does not have permission to equip %hat%."
+
+hat-equip-success: "%prefix% You equipped %hat% successfully!"
+hat-equip-success-other: "%prefix% The player equipped %hat% successfully!"
+
+hat-unequip-success: "%prefix% %hat% has been unequipped!"
+hat-unequip-success-other: "%prefix% That player's %hat% has been unequipped!"
+
+helmet-exist: "%prefix% Something else is already on your head!"
+helmet-exist-other: "%prefix% That player already has something on their head!"
+
+invalid-hat: "%prefix% &r%hat%&f is not a hat!"
+no-hat: "%prefix% You're not wearing a hat!"
+no-hat-other: "%prefix% That player isn't wearing a hat!"
+
+not-online: "%prefix% That player is not online!"
+not-a-player: "%prefix% You need to be a player to send that command!"
+
+help-header: "<g:#f9d976:#f39f86>==========** CustomHats **========="
+command-help: "<g:#f9d976:#f39f86>%usage% - &f%description%"
+help-footer: "<g:#f9d976:#f39f86>==========** CustomHats **========="

@@ -1,0 +1,11 @@
+name: CustomHats
+version: '${project.version}'
+main: me.faun.customhats.CustomHats
+api-version: 1.13
+author: Faun
+description: 'A plugin that allows you to select custom hats from a neat looking GUI.'
+
+commands:
+  customhats:
+    description: The main command of the plugin
+    aliases: [hats]

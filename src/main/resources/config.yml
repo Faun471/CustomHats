@@ -1,0 +1,39 @@
+gui-title: "&fHat Selection"
+gui-rows: 3
+
+border-item:
+  type: "LIGHT_GRAY_STAINED_GLASS_PANE"
+  name: " "
+  model: 0
+  glow: false
+border-slots: [0,1,2,3,4,5,6,7,8,18,19,20,21,22,23,24,25,26]
+
+next-button:
+  type: "ARROW"
+  name: "Next Page"
+  model: 0
+  glow: false
+  row: 3
+  column: 3
+previous-button:
+  type: "ARROW"
+  name: "Previous Page"
+  model: 0
+  glow: false
+  row: 3
+  column: 7
+close-button:
+  type: "BARRIER"
+  name: "Close GUI"
+  model: 0
+  glow: false
+  row: 3
+  column: 5
+
+only-show-owned-hats: false
+
+hats:
+  crown:
+    type: "IRON_INGOT"
+    model: 1
+    name: "&fCrown"

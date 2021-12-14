@@ -14,14 +14,14 @@ next-button:
   model: 0
   glow: false
   row: 3
-  column: 3
+  column: 7
 previous-button:
   type: "ARROW"
   name: "Previous Page"
   model: 0
   glow: false
   row: 3
-  column: 7
+  column: 3
 close-button:
   type: "BARRIER"
   name: "Close GUI"

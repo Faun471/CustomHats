@@ -26,7 +26,7 @@ public class ItemUtils {
      *  @param config   The config file where the item can be found
      *  @param path     The path of the item in the config file.
      */
-    public static GuiItem getItemFromConfig (FileConfiguration config, String path) {
+    public static GuiItem getItemFromConfig(FileConfiguration config, String path) {
         ConfigurationSection configurationSection = config.getConfigurationSection(path);
 
         Map<String, Object> values = configurationSection.getValues(false);

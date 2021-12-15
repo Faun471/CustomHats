@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class StringUtils {
 
     /**
-     *  Returns a Component of the parsed message. This will also replace all instance of %prefix%.
+     *  Returns a Component of the parsed message. This will also replace all instances of %prefix%.
      *
      *  @param text     The text to parse.
      */

@@ -7,7 +7,6 @@ import me.faun.customhats.utils.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class UnequipCommand extends Command {
+
     public UnequipCommand() {
         super(Collections.singletonList("unequip"), "This will remove the player's hat.", "", "/hats unequip <player> <hat>", false);
     }

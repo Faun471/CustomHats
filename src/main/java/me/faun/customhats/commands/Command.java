@@ -44,7 +44,6 @@ public abstract class Command {
                 .collect(Collectors.toList());
     }
 
-
     public abstract boolean execute(CommandSender sender, String[] arguments);
 
     public abstract List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String label, String[] args);

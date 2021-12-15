@@ -26,6 +26,7 @@ public class InventoryClickListener implements Listener {
             CustomHats.getCommands().unequipCommand.unequip(player, null);
             return;
         }
+
         item.setType(Material.AIR);
     }
 
@@ -39,6 +40,7 @@ public class InventoryClickListener implements Listener {
                 return;
             }
         }
+
         if (HatUtils.isHat(stack.getItemMeta())) {
             stack.setType(Material.AIR);
             event.setCancelled(true);

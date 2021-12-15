@@ -72,7 +72,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             }
             return executingCommand.execute(sender, args);
         }
-        CustomHats.getCommands().helpCommand.sendHelp(sender);
+        CustomHats.getCommands().helpCommand.sendCommandList(sender);
         return false;
     }
 

@@ -26,7 +26,6 @@ public class EquipCommand extends Command {
             case 0:
             case 1:
                 StringUtils.sendComponent(sender, syntax);
-                break;
             case 2:
                 if (sender instanceof Player) {
                     equip((Player) sender, args[1]);
@@ -40,12 +39,13 @@ public class EquipCommand extends Command {
                     StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("no-perms"));
                     return false;
                 }
+
                 Player player = Bukkit.getPlayer(args[2]);
                 if (player == null) {
                     StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("not-online"));
                     return false;
                 } else if (player.getEquipment().getHelmet() == null || HatUtils.isHat(player.getEquipment().getHelmet().getItemMeta())) {
-                    equip(player, args[1], sender);
+                    equipOther(player, args[1], sender);
                     return true;
                 } else {
                     StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("helmet-exist-other"));
@@ -55,7 +55,7 @@ public class EquipCommand extends Command {
         return true;
     }
 
-    public void equip (Player player, String hatName) {
+    public void equip(Player player, String hatName) {
         ItemStack hat = CustomHats.getHatManager().getHats().get(hatName);
         if (hat == null) {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
@@ -77,7 +77,7 @@ public class EquipCommand extends Command {
         }
     }
 
-    public void equip (Player player, String hatName, CommandSender sender) {
+    public void equipOther(Player player, String hatName, CommandSender sender) {
         ItemStack hat = CustomHats.getHatManager().getHats().get(hatName);
         if (hat == null) {
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
@@ -103,12 +103,13 @@ public class EquipCommand extends Command {
     @Override
     public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (args.length == 2) {
-            return CustomHats.getConfigManager().getConfig("config").getBoolean("only-show-owned-hats")
-                    ? new ArrayList<>(CustomHats.getHatManager().getAvailableHats(sender)) : new ArrayList<>(CustomHats.getHatManager().getHats().keySet());
+            return new ArrayList<>(CustomHats.getConfigManager().getConfig("config").getBoolean("only-show-owned-hats")
+                    ? CustomHats.getHatManager().getAvailableHats(sender) : CustomHats.getHatManager().getHats().keySet());
         }
         if (args.length == 3 && sender.hasPermission("customhats.equip.other")) {
             return StringUtils.onlinePlayerList();
         }
+
         return Collections.emptyList();
     }
 }

@@ -31,7 +31,7 @@ public class HatUtils {
      *  @param pdc1  The first string.
      *  @param pdc2  The second string.
      */
-    public static boolean comparePDC (String pdc1, String pdc2) {
+    public static boolean comparePDC(String pdc1, String pdc2) {
         return pdc1.equals(pdc2);
     }
 
@@ -42,7 +42,7 @@ public class HatUtils {
      *  @param glow  This will determine whether the item should glow or not.
      *               Additionally, this will remove all the item's enchantments.
      */
-    public static void changeGlow (@NotNull ItemStack item, boolean glow) {
+    public static void changeGlow(@NotNull ItemStack item, boolean glow) {
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
         if (!meta.hasEnchants() && glow) {
@@ -62,7 +62,7 @@ public class HatUtils {
      *  @param gui      The gui that the player is viewing.
      *  @param player   The player that is viewing the gui.
      */
-    public static void updateGlow (PaginatedGui gui, Player player) {
+    public static void updateGlow(PaginatedGui gui, Player player) {
         if (gui.isUpdating()) return;
         Bukkit.getScheduler().runTaskAsynchronously(CustomHats.getInstance(), () -> {
             for (GuiItem g : gui.getCurrentPageItems().values()) {
@@ -86,5 +86,18 @@ public class HatUtils {
     public static boolean isHat(@Nullable ItemMeta meta) {
         if (meta == null|| !meta.hasCustomModelData()) return false;
         return meta.getPersistentDataContainer().has(CustomHats.getHatManager().key, PersistentDataType.STRING);
+    }
+
+    /**
+     *  Returns true if a specified player can equip the hat.
+     *
+     *  @param player   The player that will be checked.
+     *  @param hatMeta  The hat that the player will equip.
+     */
+    public static boolean canEquip(Player player, ItemMeta hatMeta) {
+        ItemMeta playerHelmetMeta = player.getEquipment().getHelmet().getItemMeta();
+
+        return  (playerHelmetMeta == null || (HatUtils.isHat(playerHelmetMeta) && !HatUtils.comparePDC(HatUtils.getPDC(playerHelmetMeta),
+                HatUtils.getPDC(hatMeta))));
     }
 }

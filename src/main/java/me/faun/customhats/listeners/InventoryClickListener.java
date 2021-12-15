@@ -1,7 +1,7 @@
 package me.faun.customhats.listeners;
 
 import me.faun.customhats.CustomHats;
-import me.faun.customhats.utils.ItemUtils;
+import me.faun.customhats.utils.HatUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,8 +22,8 @@ public class InventoryClickListener implements Listener {
             return;
         }
 
-        if (ItemUtils.isHat(item.getItemMeta()) && event.getSlotType().equals(InventoryType.SlotType.ARMOR)) {
-            CustomHats.getCommands().unequipCommand.unequip(player);
+        if (HatUtils.isHat(item.getItemMeta()) && event.getSlotType().equals(InventoryType.SlotType.ARMOR)) {
+            CustomHats.getCommands().unequipCommand.unequip(player, null);
             return;
         }
         item.setType(Material.AIR);
@@ -39,7 +39,7 @@ public class InventoryClickListener implements Listener {
                 return;
             }
         }
-        if (ItemUtils.isHat(stack.getItemMeta())) {
+        if (HatUtils.isHat(stack.getItemMeta())) {
             stack.setType(Material.AIR);
             event.setCancelled(true);
         }

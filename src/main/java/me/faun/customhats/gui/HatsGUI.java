@@ -5,6 +5,7 @@ import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
 
 import me.faun.customhats.CustomHats;
+import me.faun.customhats.utils.HatUtils;
 import me.faun.customhats.utils.ItemUtils;
 import me.faun.customhats.utils.StringUtils;
 
@@ -30,7 +31,7 @@ public class HatsGUI {
                 .create();
 
         gui.setOpenGuiAction(event -> Bukkit.getScheduler().runTaskAsynchronously(CustomHats.getInstance(),
-                () -> ItemUtils.updateGlow(gui, ((Player) event.getPlayer()))));
+                () -> HatUtils.updateGlow(gui, ((Player) event.getPlayer()))));
 
         // Border
         for (int slot : config.getIntegerList("border-slots")) gui.setItem(slot, ItemUtils.getItemFromConfig(config,"border-item"));
@@ -50,11 +51,11 @@ public class HatsGUI {
 
         previousButton.setAction(event -> {
             gui.previous();
-            ItemUtils.updateGlow(gui, ((Player) event.getWhoClicked()));
+            HatUtils.updateGlow(gui, ((Player) event.getWhoClicked()));
         });
         nextButton.setAction(event -> {
             gui.next();
-            ItemUtils.updateGlow(gui, ((Player) event.getWhoClicked()));
+            HatUtils.updateGlow(gui, ((Player) event.getWhoClicked()));
         });
 
         closeButton.setAction(event -> gui.close(player));
@@ -74,16 +75,16 @@ public class HatsGUI {
             GuiItem hatItem = ItemUtils.getItemFromConfig(config,"hats." + hat);
             hatItem.setAction(event -> {
                 Player p = (Player) event.getWhoClicked();
-                Bukkit.getScheduler().runTaskAsynchronously(CustomHats.getInstance(), () -> ItemUtils.updateGlow(gui, ((Player) event.getWhoClicked())));
+                Bukkit.getScheduler().runTaskAsynchronously(CustomHats.getInstance(), () -> HatUtils.updateGlow(gui, ((Player) event.getWhoClicked())));
 
                 ItemStack playerHelmet = p.getEquipment().getHelmet();
                 ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
                 ItemMeta hatMeta = event.getCurrentItem().getItemMeta();
 
-                if (playerHelmetMeta == null || (ItemUtils.isHat(playerHelmetMeta) && !ItemUtils.comparePDC(ItemUtils.getPDC(playerHelmetMeta),
-                        ItemUtils.getPDC(hatMeta)))) {
+                if (playerHelmetMeta == null || (HatUtils.isHat(playerHelmetMeta) && !HatUtils.comparePDC(HatUtils.getPDC(playerHelmetMeta),
+                        HatUtils.getPDC(hatMeta)))) {
                     CustomHats.getCommands().equipCommand.equip(p, hat);
-                } else if (ItemUtils.comparePDC(ItemUtils.getPDC(playerHelmetMeta), ItemUtils.getPDC(hatMeta))) {
+                } else if (HatUtils.comparePDC(HatUtils.getPDC(playerHelmetMeta), HatUtils.getPDC(hatMeta))) {
                     CustomHats.getCommands().unequipCommand.unequip(p, hat);
                 }
                 gui.update();

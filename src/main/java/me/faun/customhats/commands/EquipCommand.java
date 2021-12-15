@@ -1,7 +1,7 @@
 package me.faun.customhats.commands;
 
 import me.faun.customhats.CustomHats;
-import me.faun.customhats.utils.ItemUtils;
+import me.faun.customhats.utils.HatUtils;
 import me.faun.customhats.utils.StringUtils;
 
 import org.bukkit.Bukkit;
@@ -47,7 +47,7 @@ public class EquipCommand extends Command {
                 if (player == null) {
                     StringUtils.sendComponent(sender, messages.getString("not-online"));
                     return false;
-                } else if (player.getEquipment().getHelmet() == null || ItemUtils.isHat(player.getEquipment().getHelmet().getItemMeta())) {
+                } else if (player.getEquipment().getHelmet() == null || HatUtils.isHat(player.getEquipment().getHelmet().getItemMeta())) {
                     equip(player, args[1], sender);
                     return true;
                 } else {
@@ -73,7 +73,7 @@ public class EquipCommand extends Command {
 
         ItemStack playerHelmet = player.getEquipment().getHelmet();
         ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
-        if (playerHelmetMeta == null || ItemUtils.isHat(playerHelmetMeta)) {
+        if (playerHelmetMeta == null || HatUtils.isHat(playerHelmetMeta)) {
             player.getEquipment().setHelmet(hat);
             StringUtils.sendComponent(player, messages.getString("hat-equip-success")
                     .replace("%hat%", hat.getItemMeta().getDisplayName()));
@@ -96,7 +96,7 @@ public class EquipCommand extends Command {
         ItemStack playerHelmet = player.getEquipment().getHelmet();
         ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
 
-        if (playerHelmetMeta == null || ItemUtils.isHat(playerHelmetMeta)) {
+        if (playerHelmetMeta == null || HatUtils.isHat(playerHelmetMeta)) {
             player.getEquipment().setHelmet(hat);
             StringUtils.sendComponent(sender, messages.getString("hat-equip-success-other")
                     .replace("%hat%", hat.getItemMeta().getDisplayName()));

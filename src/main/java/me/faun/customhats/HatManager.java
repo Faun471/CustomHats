@@ -21,6 +21,7 @@ public class HatManager {
     }
 
     public void initHats(){
+        allHats.clear();
         FileConfiguration config = CustomHats.getConfigManager().getConfig("config");
         Set<String> hats = config.getConfigurationSection("hats").getKeys(false);
 

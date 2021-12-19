@@ -70,10 +70,10 @@ public class UnequipCommand extends Command {
 
         if (playerHelmet == null || !HatUtils.isHat(playerHelmetMeta)) {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("no-hat"));
-        } else if (hat != null){
+        } else if (hat != null || HatUtils.isHat(playerHelmetMeta)){
             player.getEquipment().setHelmet(new ItemStack(Material.AIR));
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("hat-unequip-success")
-                    .replace("%hat%", hat.getItemMeta().getDisplayName()));
+                    .replace("%hat%", Optional.ofNullable(hat.getItemMeta().getDisplayName()).orElse(playerHelmetMeta.getDisplayName())));
         } else {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
                     .replace("%hat%", Optional.ofNullable(hatName).orElse(" ")));

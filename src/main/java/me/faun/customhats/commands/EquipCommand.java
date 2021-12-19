@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class EquipCommand extends Command {
 
@@ -59,7 +60,7 @@ public class EquipCommand extends Command {
         ItemStack hat = CustomHats.getHatManager().getHats().get(hatName);
         if (hat == null) {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
-                    .replace("%hat%", hatName));
+                    .replace("%hat%", Optional.of(hatName).orElse(" ")));
             return;
         }
 
@@ -81,7 +82,7 @@ public class EquipCommand extends Command {
         ItemStack hat = CustomHats.getHatManager().getHats().get(hatName);
         if (hat == null) {
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
-                    .replace("%hat%", hatName));
+                    .replace("%hat%", Optional.of(hatName).orElse(" ")));
             return;
         }
 

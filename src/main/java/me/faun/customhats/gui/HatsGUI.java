@@ -93,19 +93,16 @@ public class HatsGUI {
         for (String hat : hats) {
             GuiItem hatItem = ItemUtils.getItemFromConfig(CustomHats.getConfigManager().getConfig("config"),"hats." + hat);
             hatItem.setAction(event -> {
-                Bukkit.getScheduler().runTaskAsynchronously(CustomHats.getInstance(), () -> HatUtils.updateGlow(gui, ((Player) event.getWhoClicked())));
-
                 ItemStack playerHelmet = player.getEquipment().getHelmet();
                 ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
                 ItemMeta hatMeta = event.getCurrentItem().getItemMeta();
 
                 if (HatUtils.canEquip(player, hatMeta)) {
                     CustomHats.getCommands().equipCommand.equip(player, hat);
-                } else if (HatUtils.comparePDC(HatUtils.getPDC(playerHelmetMeta), HatUtils.getPDC(hatMeta))) {
+                } else if (HatUtils.getPDC(playerHelmetMeta).equals(HatUtils.getPDC(hatMeta))) {
                     CustomHats.getCommands().unequipCommand.unequip(player, hat);
                 }
-
-                gui.update();
+                HatUtils.updateGlow(gui, ((Player) event.getWhoClicked()));
             });
 
             gui.addItem(hatItem);

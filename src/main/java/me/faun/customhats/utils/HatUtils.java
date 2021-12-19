@@ -26,16 +26,6 @@ public class HatUtils {
     }
 
     /**
-     *  Returns true if both pdc1 is the same as pdc2. This is case-sensitive.
-     *
-     *  @param pdc1  The first string.
-     *  @param pdc2  The second string.
-     */
-    public static boolean comparePDC(String pdc1, String pdc2) {
-        return pdc1.equals(pdc2);
-    }
-
-    /**
      *  This will either make an item glow or remove its glow effect.
      *
      *  @param item  The item that will be changed.
@@ -64,18 +54,16 @@ public class HatUtils {
      */
     public static void updateGlow(PaginatedGui gui, Player player) {
         if (gui.isUpdating()) return;
-        Bukkit.getScheduler().runTaskAsynchronously(CustomHats.getInstance(), () -> {
-            for (GuiItem g : gui.getCurrentPageItems().values()) {
-                ItemStack itemStack = g.getItemStack();
-                ItemMeta meta = itemStack.getItemMeta();
+        for (GuiItem g : gui.getCurrentPageItems().values()) {
+            ItemStack itemStack = g.getItemStack();
+            ItemMeta meta = itemStack.getItemMeta();
 
-                changeGlow(itemStack, player.getEquipment().getHelmet() != null
-                        && HatUtils.comparePDC(HatUtils.getPDC(player.getEquipment().getHelmet().getItemMeta()),
-                        HatUtils.getPDC(meta)));
-                gui.update();
-            }
-        });
+            changeGlow(itemStack, player.getEquipment().getHelmet() != null
+                    && HatUtils.getPDC(player.getEquipment().getHelmet().getItemMeta()).equals(
+                    HatUtils.getPDC(meta)));
 
+            gui.update();
+        }
     }
 
     /**
@@ -95,9 +83,9 @@ public class HatUtils {
      *  @param hatMeta  The hat that the player will equip.
      */
     public static boolean canEquip(Player player, ItemMeta hatMeta) {
-        ItemMeta playerHelmetMeta = player.getEquipment().getHelmet().getItemMeta();
+        ItemStack playerHelmet = player.getEquipment().getHelmet();
+        ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
 
-        return  (playerHelmetMeta == null || (HatUtils.isHat(playerHelmetMeta) && !HatUtils.comparePDC(HatUtils.getPDC(playerHelmetMeta),
-                HatUtils.getPDC(hatMeta))));
+        return (playerHelmetMeta == null || (HatUtils.isHat(playerHelmetMeta) && !(HatUtils.getPDC(playerHelmetMeta).equals(HatUtils.getPDC(hatMeta)))));
     }
 }

@@ -66,7 +66,7 @@ public class UnequipCommand extends Command {
     public void unequip(Player player, @Nullable String hatName) {
         ItemStack playerHelmet = player.getEquipment().getHelmet();
         ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
-        ItemStack hat = hatName != null ? CustomHats.getHatManager().getHats().get(hatName) : playerHelmet;
+        ItemStack hat = hatName != null ? CustomHats.getHatManager().getAllHats().get(hatName) : playerHelmet;
 
         if (playerHelmet == null || !HatUtils.isHat(playerHelmetMeta)) {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("no-hat"));
@@ -83,7 +83,7 @@ public class UnequipCommand extends Command {
     public void unequip(Player player, String hatName, CommandSender sender) {
         ItemStack playerHelmet = player.getEquipment().getHelmet();
 
-        ItemStack hat = CustomHats.getHatManager().getHats().get(hatName);
+        ItemStack hat = CustomHats.getHatManager().getAllHats().get(hatName);
         if (hat == null) {
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
                     .replace("%hat%", Optional.ofNullable(hatName).orElse(" ")));
@@ -110,7 +110,7 @@ public class UnequipCommand extends Command {
         }
         if (args.length == 3 && sender.hasPermission("customhats.unequip.other")) {
             return new ArrayList<>(CustomHats.getConfigManager().getConfig("config").getBoolean("only-show-owned-hats")
-                    ? CustomHats.getHatManager().getAvailableHats(sender) :  CustomHats.getHatManager().getHats().keySet());
+                    ? CustomHats.getHatManager().getAvailableHats(sender) :  CustomHats.getHatManager().getAllHats().keySet());
         }
 
         return Collections.emptyList();

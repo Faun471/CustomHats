@@ -1,13 +1,11 @@
 package me.faun.customhats.commands;
 
-import me.faun.customhats.ConfigManager;
 import me.faun.customhats.CustomHats;
 import me.faun.customhats.utils.HatUtils;
 import me.faun.customhats.utils.StringUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -60,7 +58,7 @@ public class EquipCommand extends Command {
     }
 
     public void equip(Player player, String hatName) {
-        ItemStack hat = CustomHats.getHatManager().getHats().get(hatName);
+        ItemStack hat = CustomHats.getHatManager().getAllHats().get(hatName);
         if (hat == null) {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
                     .replace("%hat%", Optional.of(hatName).orElse(" ")));
@@ -88,7 +86,7 @@ public class EquipCommand extends Command {
     }
 
     public void equipOther(Player player, String hatName, CommandSender sender) {
-        ItemStack hat = CustomHats.getHatManager().getHats().get(hatName);
+        ItemStack hat = CustomHats.getHatManager().getAllHats().get(hatName);
         if (hat == null) {
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
                     .replace("%hat%", Optional.of(hatName).orElse(" ")));
@@ -118,7 +116,7 @@ public class EquipCommand extends Command {
     public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (args.length == 2) {
             return new ArrayList<>(CustomHats.getConfigManager().getConfig("config").getBoolean("only-show-owned-hats")
-                    ? CustomHats.getHatManager().getAvailableHats(sender) : CustomHats.getHatManager().getHats().keySet());
+                    ? CustomHats.getHatManager().getAvailableHats(sender) : CustomHats.getHatManager().getAllHats().keySet());
         }
         if (args.length == 3 && sender.hasPermission("customhats.equip.other")) {
             return StringUtils.onlinePlayerList();

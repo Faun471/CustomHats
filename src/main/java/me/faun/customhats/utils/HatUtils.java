@@ -22,7 +22,7 @@ public class HatUtils {
      */
     public static String getPDC(ItemMeta meta) {
         if (!isHat(meta)) return "";
-        return meta.getPersistentDataContainer().getOrDefault(CustomHats.getHatManager().key, PersistentDataType.STRING,"");
+        return meta.getPersistentDataContainer().getOrDefault(CustomHats.getHatManager().getKey(), PersistentDataType.STRING,"");
     }
 
     /**
@@ -75,7 +75,7 @@ public class HatUtils {
         if (meta == null|| !meta.hasCustomModelData()) {
             return false;
         }
-        return meta.getPersistentDataContainer().has(CustomHats.getHatManager().key, PersistentDataType.STRING);
+        return meta.getPersistentDataContainer().has(CustomHats.getHatManager().getKey(), PersistentDataType.STRING);
     }
 
     /**

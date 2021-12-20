@@ -15,7 +15,6 @@ public class ConfigManager {
 
     public ConfigManager() {
         this.configs = new HashMap<>();
-        reloadConfigs();
     }
 
     public void reloadConfigs() {

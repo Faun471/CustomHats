@@ -5,6 +5,7 @@ import me.mattstudios.msg.adventure.AdventureMessage;
 
 import net.kyori.adventure.text.Component;
 
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -24,8 +25,29 @@ public class StringUtils {
      */
     public static Component messageParse(String text) {
         AdventureMessage message = AdventureMessage.create();
+
         return message.parse(text.replace("%prefix%",
                 Optional.ofNullable(CustomHats.getConfigManager().getConfig("messages").getString("prefix")).orElse("Hats")));
+    }
+
+
+    /**
+     * Returns a String version of a Component that supports mf-msg's hex format.
+     *
+     * @param text      The Component to convert into String.
+     * @return          The converted Component
+     */
+    public static String componentToString(Component text) {
+        StringBuilder sb = new StringBuilder();
+        for (Component component : text.children()) {
+            if (component.compact().style().color() != null) {
+                sb.append("&").append((component.compact()).style().color().asHexString())
+                        .append(((TextComponent) component.compact()).content());
+            } else {
+                sb.append(((TextComponent) component.compact()).content());
+            }
+        }
+        return sb.toString();
     }
 
     /**
@@ -49,7 +71,7 @@ public class StringUtils {
     }
 
     /**
-     * @return      This will return a list of string containing all online players in the server.
+     * @return  This will return a list of string containing all online players in the server.
      */
     public static List<String> onlinePlayerList() {
         return Bukkit.getOnlinePlayers().stream()

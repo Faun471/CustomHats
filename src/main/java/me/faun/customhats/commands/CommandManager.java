@@ -1,5 +1,6 @@
 package me.faun.customhats.commands;
 
+import me.faun.customhats.ConfigManager;
 import me.faun.customhats.CustomHats;
 
 import me.faun.customhats.utils.StringUtils;

@@ -72,7 +72,9 @@ public class HatUtils {
      *  @param meta  The item that will be checked.
      */
     public static boolean isHat(@Nullable ItemMeta meta) {
-        if (meta == null|| !meta.hasCustomModelData()) return false;
+        if (meta == null|| !meta.hasCustomModelData()) {
+            return false;
+        }
         return meta.getPersistentDataContainer().has(CustomHats.getHatManager().key, PersistentDataType.STRING);
     }
 

@@ -1,11 +1,13 @@
 package me.faun.customhats.commands;
 
+import me.faun.customhats.ConfigManager;
 import me.faun.customhats.CustomHats;
 import me.faun.customhats.utils.HatUtils;
 import me.faun.customhats.utils.StringUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -27,6 +29,7 @@ public class EquipCommand extends Command {
             case 0:
             case 1:
                 StringUtils.sendComponent(sender, syntax);
+                return false;
             case 2:
                 if (sender instanceof Player) {
                     equip((Player) sender, args[1]);
@@ -64,6 +67,11 @@ public class EquipCommand extends Command {
             return;
         }
 
+        if (player.getEquipment().getHelmet() != null && !HatUtils.isHat(player.getEquipment().getHelmet().getItemMeta())) {
+            StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("helmet-exist"));
+            return;
+        }
+
         if (!player.hasPermission("customhats.hat." + hatName)) {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("no-perms-hat"));
             return;
@@ -73,7 +81,8 @@ public class EquipCommand extends Command {
         ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
         if (playerHelmetMeta == null || HatUtils.isHat(playerHelmetMeta)) {
             player.getEquipment().setHelmet(hat);
-            StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("hat-equip-success")
+            player.sendMessage(hat.getItemMeta().getDisplayName());
+            StringUtils.sendComponent(player, (CustomHats.getConfigManager().getConfig("messages").getString("hat-equip-success"))
                     .replace("%hat%", hat.getItemMeta().getDisplayName()));
         }
     }
@@ -86,6 +95,11 @@ public class EquipCommand extends Command {
             return;
         }
 
+        if (!HatUtils.isHat(player.getEquipment().getHelmet().getItemMeta())) {
+            StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("helmet-exist-other"));
+            return;
+        }
+
         if (!player.hasPermission("customhats.hat." + hatName)) {
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("no-perms-hat-other"));
             return;
@@ -93,7 +107,6 @@ public class EquipCommand extends Command {
 
         ItemStack playerHelmet = player.getEquipment().getHelmet();
         ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
-
         if (playerHelmetMeta == null || HatUtils.isHat(playerHelmetMeta)) {
             player.getEquipment().setHelmet(hat);
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("hat-equip-success-other")

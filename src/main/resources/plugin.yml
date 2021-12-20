@@ -1,7 +1,7 @@
 name: CustomHats
 version: '${project.version}'
 main: me.faun.customhats.CustomHats
-api-version: 1.13
+api-version: 1.16.5
 author: Faun
 description: 'A plugin that allows you to select custom hats from a neat looking GUI.'
 

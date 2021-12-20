@@ -101,6 +101,8 @@ public class HatsGUI {
                     CustomHats.getCommands().equipCommand.equip(player, hat);
                 } else if (HatUtils.getPDC(playerHelmetMeta).equals(HatUtils.getPDC(hatMeta))) {
                     CustomHats.getCommands().unequipCommand.unequip(player, hat);
+                } else {
+                    StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("helmet-exist"));
                 }
                 HatUtils.updateGlow(gui, ((Player) event.getWhoClicked()));
             });

@@ -20,6 +20,7 @@ public class StringUtils {
      *  Returns a Component of the parsed message. This will also replace all instances of %prefix%.
      *
      *  @param text     The text to parse.
+     *  @return         The result of the parsed text.
      */
     public static Component messageParse(String text) {
         AdventureMessage message = AdventureMessage.create();
@@ -41,14 +42,14 @@ public class StringUtils {
      *  This will send a Component to a CommandSender
      *
      *  @param sender   The CommandSender that will receive the message.
-     *  @param message  The message that will be sent to the player.
+     *  @param message  The message that will be sent to the command sender.
      */
     public static void sendComponent(CommandSender sender, String message) {
         CustomHats.getInstance().adventure().sender(sender).sendMessage(messageParse(message));
     }
 
     /**
-     *  This will return a list of string containing all online players in the server.
+     * @return      This will return a list of string containing all online players in the server.
      */
     public static List<String> onlinePlayerList() {
         return Bukkit.getOnlinePlayers().stream()

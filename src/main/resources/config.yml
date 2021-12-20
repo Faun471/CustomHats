@@ -34,6 +34,6 @@ only-show-owned-hats: false
 
 hats:
   crown:
+    name: "&fCrown"
     type: "IRON_INGOT"
     model: 1
-    name: "&fCrown"

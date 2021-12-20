@@ -64,9 +64,9 @@ public class UnequipCommand extends Command {
     }
 
     public void unequip(Player player, @Nullable String hatName) {
-        ItemStack hat = hatName != null ? CustomHats.getHatManager().getHats().get(hatName) : null;
         ItemStack playerHelmet = player.getEquipment().getHelmet();
         ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
+        ItemStack hat = hatName != null ? CustomHats.getHatManager().getHats().get(hatName) : playerHelmet;
 
         if (playerHelmet == null || !HatUtils.isHat(playerHelmetMeta)) {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("no-hat"));

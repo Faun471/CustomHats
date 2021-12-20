@@ -10,6 +10,7 @@ hat-equip-success-other: "%prefix% The player equipped %hat% successfully!"
 
 hat-unequip-success: "%prefix% %hat% has been unequipped!"
 hat-unequip-success-other: "%prefix% That player's %hat% has been unequipped!"
+doesnt-match-hat: "%prefix% That player isn't wearing that hat!"
 
 helmet-exist: "%prefix% Something else is already on your head!"
 helmet-exist-other: "%prefix% That player already has something on their head!"

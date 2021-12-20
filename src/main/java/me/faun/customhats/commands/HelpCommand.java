@@ -18,20 +18,29 @@ public class HelpCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Commands commands = CustomHats.getCommands();
-        if (args.length < 2) sendHelp(sender);
+        if (args.length < 2) sendCommandList(sender);
         else {
-            String command = args[1];
-            if (command.equalsIgnoreCase("hats")) sendHelp(sender);
-            if (command.equalsIgnoreCase("menu")) sendCommandHelp(sender, commands.menuCommand);
-            if (command.equalsIgnoreCase("equip")) sendCommandHelp(sender, commands.equipCommand);
-            if (command.equalsIgnoreCase("unequip")) sendCommandHelp(sender, commands.unequipCommand);
-            if (command.equalsIgnoreCase("reload")) sendCommandHelp(sender, commands.reloadCommand);
+            switch (args[1].toLowerCase()) {
+                case "hats":
+                    sendCommandList(sender);
+                case "menu":
+                    sendCommandHelp(sender, commands.menuCommand);
+                case "equip":
+                    sendCommandHelp(sender, commands.equipCommand);
+                case "unequip":
+                    sendCommandHelp(sender, commands.unequipCommand);
+                case "reload":
+                    sendCommandHelp(sender, commands.reloadCommand);
+                default:
+                    sendCommandList(sender);
+            }
         }
         return true;
     }
 
-    public void sendHelp(CommandSender sender) {
+    public void sendCommandList(CommandSender sender) {
         StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("help-header"));
+
         for (Command cmd : CustomHats.getCommandManager().getAvailableCommands(sender).stream().distinct().collect(Collectors.toList())) {
                     StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("command-help")
                             .replace("%command%", cmd.aliases.get(0))
@@ -41,7 +50,7 @@ public class HelpCommand extends Command {
         StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("help-footer"));
     }
 
-    public void sendCommandHelp (CommandSender sender, Command command) {
+    public void sendCommandHelp(CommandSender sender, Command command) {
         StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("help-header"));
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("command-help")
                     .replace("%command%", command.aliases.get(0))

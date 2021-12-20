@@ -1,5 +1,6 @@
 package me.faun.customhats.commands;
 
+import me.faun.customhats.ConfigManager;
 import me.faun.customhats.CustomHats;
 
 import me.faun.customhats.utils.StringUtils;
@@ -72,7 +73,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             }
             return executingCommand.execute(sender, args);
         }
-        CustomHats.getCommands().helpCommand.sendHelp(sender);
+        CustomHats.getCommands().helpCommand.sendCommandList(sender);
         return false;
     }
 

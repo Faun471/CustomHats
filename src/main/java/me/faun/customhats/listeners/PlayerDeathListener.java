@@ -1,6 +1,6 @@
 package me.faun.customhats.listeners;
 
-import me.faun.customhats.utils.ItemUtils;
+import me.faun.customhats.utils.HatUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -13,6 +13,6 @@ public class PlayerDeathListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         List<ItemStack> drops =  event.getDrops();
-        drops.removeIf(drop -> ItemUtils.isHat(drop.getItemMeta()));
+        drops.removeIf(drop -> HatUtils.isHat(drop.getItemMeta()));
     }
 }

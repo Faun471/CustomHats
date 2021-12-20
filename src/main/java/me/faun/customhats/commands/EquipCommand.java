@@ -79,9 +79,8 @@ public class EquipCommand extends Command {
         ItemMeta playerHelmetMeta = playerHelmet != null ? playerHelmet.getItemMeta() : null;
         if (playerHelmetMeta == null || HatUtils.isHat(playerHelmetMeta)) {
             player.getEquipment().setHelmet(hat);
-            player.sendMessage(hat.getItemMeta().getDisplayName());
             StringUtils.sendComponent(player, (CustomHats.getConfigManager().getConfig("messages").getString("hat-equip-success"))
-                    .replace("%hat%", hat.getItemMeta().getDisplayName()));
+                    .replace("%hat%", Optional.of(StringUtils.componentToString(hat.getItemMeta().displayName())).orElse(hat.getType().name())));
         }
     }
 
@@ -108,7 +107,7 @@ public class EquipCommand extends Command {
         if (playerHelmetMeta == null || HatUtils.isHat(playerHelmetMeta)) {
             player.getEquipment().setHelmet(hat);
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("hat-equip-success-other")
-                    .replace("%hat%", hat.getItemMeta().getDisplayName()));
+                    .replace("%hat%", Optional.of(StringUtils.componentToString(hat.getItemMeta().displayName())).orElse(hat.getType().name())));
         }
     }
 

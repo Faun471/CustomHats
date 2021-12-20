@@ -73,7 +73,7 @@ public class UnequipCommand extends Command {
         } else if (hat != null || HatUtils.isHat(playerHelmetMeta)){
             player.getEquipment().setHelmet(new ItemStack(Material.AIR));
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("hat-unequip-success")
-                    .replace("%hat%", Optional.ofNullable(hat.getItemMeta().getDisplayName()).orElse(playerHelmetMeta.getDisplayName())));
+                    .replace("%hat%", StringUtils.componentToString(playerHelmetMeta.displayName())));
         } else {
             StringUtils.sendComponent(player, CustomHats.getConfigManager().getConfig("messages").getString("invalid-hat")
                     .replace("%hat%", Optional.ofNullable(hatName).orElse(" ")));
@@ -96,10 +96,10 @@ public class UnequipCommand extends Command {
         } else if (HatUtils.getPDC(playerHelmetMeta).equals(HatUtils.getPDC(hat.getItemMeta()))) {
             player.getEquipment().setHelmet(new ItemStack(Material.AIR));
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("hat-unequip-success-other")
-                    .replace("%hat%", hat.getItemMeta().getDisplayName()));
+                    .replace("%hat%", StringUtils.componentToString(playerHelmetMeta.displayName())));
         } else {
             StringUtils.sendComponent(sender, CustomHats.getConfigManager().getConfig("messages").getString("doesnt-match-hat")
-                    .replace("%hat%", hat.getItemMeta().getDisplayName()));
+                    .replace("%hat%", StringUtils.componentToString(playerHelmetMeta.displayName())));
         }
     }
 
